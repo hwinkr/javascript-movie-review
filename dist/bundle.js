@@ -226,7 +226,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _constants_movies__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants/movies */ \"./src/constants/movies.ts\");\nvar __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {\n    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }\n    return new (P || (P = Promise))(function (resolve, reject) {\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\n        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\n        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\n    });\n};\n\nclass MovieClient {\n    constructor(baseUrl) {\n        this.MOVIE_API_END_POINT = {\n            popular: (currentPage) => `movie/popular?language=ko-KR&page=${currentPage}`,\n            search: (currentPage, searchKeyword) => `search/movie?query=${searchKeyword}&include_adult=false&language=ko-KR&page=${currentPage}`,\n        };\n        this.BASE_URL = baseUrl;\n    }\n    decideEndPoint(currentPage, searchKeyword) {\n        if (searchKeyword === \"\")\n            return this.MOVIE_API_END_POINT.popular(currentPage);\n        return this.MOVIE_API_END_POINT.search(currentPage, searchKeyword);\n    }\n    handleResponseStatus(status) {\n        if (status === 200)\n            return;\n        switch (status) {\n            case 401:\n                throw new Error(\"유효하지 않은 access_token 입니다. 재설정 후, 다시 요청해주세요.\");\n            case 403:\n                throw new Error(\"해당 컨텐츠에 대한 접근 권한이 없습니다.\");\n            case 404:\n                throw new Error(\"요청한 컨텐츠를 찾을 수 없습니다. 요청 URL을 다시 확인해주세요.\");\n            case 500:\n                throw new Error(\"서버에서 알 수 없는 문제가 발생했습니다.\");\n            case 503:\n                throw new Error(\"서버가 컨텐츠를 보여줄 준비가 되지 않았습니다.\");\n        }\n    }\n    get(currentPage, searchKeyword) {\n        return __awaiter(this, void 0, void 0, function* () {\n            const url = this.decideEndPoint(currentPage, searchKeyword);\n            const response = yield fetch(`${this.BASE_URL}/${url}`, {\n                method: \"GET\",\n                headers: {\n                    Authorization: `Bearer ${\"MISSING_ENV_VAR\".ACCESS_TOKEN}`,\n                },\n            });\n            this.handleResponseStatus(response.status);\n            return response.json();\n        });\n    }\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new MovieClient(_constants_movies__WEBPACK_IMPORTED_MODULE_0__.BASE_URL));\n\n\n//# sourceURL=webpack://javascript-movie-review/./src/http/MoveClient.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _constants_movies__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../constants/movies */ \"./src/constants/movies.ts\");\nvar __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {\n    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }\n    return new (P || (P = Promise))(function (resolve, reject) {\n        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }\n        function rejected(value) { try { step(generator[\"throw\"](value)); } catch (e) { reject(e); } }\n        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }\n        step((generator = generator.apply(thisArg, _arguments || [])).next());\n    });\n};\n\nclass MovieClient {\n    constructor(baseUrl) {\n        this.MOVIE_API_END_POINT = {\n            popular: (currentPage) => `movie/popular?language=ko-KR&page=${currentPage}`,\n            search: (currentPage, searchKeyword) => `search/movie?query=${searchKeyword}&include_adult=false&language=ko-KR&page=${currentPage}`,\n        };\n        this.BASE_URL = baseUrl;\n    }\n    decideEndPoint(currentPage, searchKeyword) {\n        if (searchKeyword === \"\")\n            return this.MOVIE_API_END_POINT.popular(currentPage);\n        return this.MOVIE_API_END_POINT.search(currentPage, searchKeyword);\n    }\n    handleResponseStatus(status) {\n        if (status === 200)\n            return;\n        switch (status) {\n            case 401:\n                throw new Error(\"유효하지 않은 access_token 입니다. 재설정 후, 다시 요청해주세요.\");\n            case 403:\n                throw new Error(\"해당 컨텐츠에 대한 접근 권한이 없습니다.\");\n            case 404:\n                throw new Error(\"요청한 컨텐츠를 찾을 수 없습니다. 요청 URL을 다시 확인해주세요.\");\n            case 500:\n                throw new Error(\"서버에서 알 수 없는 문제가 발생했습니다.\");\n            case 503:\n                throw new Error(\"서버가 컨텐츠를 보여줄 준비가 되지 않았습니다.\");\n        }\n    }\n    get(currentPage, searchKeyword) {\n        return __awaiter(this, void 0, void 0, function* () {\n            const url = this.decideEndPoint(currentPage, searchKeyword);\n            const response = yield fetch(`${this.BASE_URL}/${url}`, {\n                method: \"GET\",\n                headers: {\n                    Authorization: `Bearer ${\"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NDk3OGYxYjdmZWRhZWIyMmYwNDEzMWFlN2UwN2RmNSIsInN1YiI6IjY1Zjg2NDZlYTZmZGFhMDE0YTZkNzAxZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.qdg8U-LaZhQeEljaO5uQOL4nV79PWxxCHELhDoa2IjI\"}`,\n                },\n            });\n            this.handleResponseStatus(response.status);\n            return response.json();\n        });\n    }\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new MovieClient(_constants_movies__WEBPACK_IMPORTED_MODULE_0__.BASE_URL));\n\n\n//# sourceURL=webpack://javascript-movie-review/./src/http/MoveClient.ts?");
 
 /***/ }),
 
@@ -344,6 +344,18 @@ eval("module.exports = __webpack_require__.p + \"6328741810b732410eec.png\";\n\n
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -362,7 +374,25 @@ eval("module.exports = __webpack_require__.p + \"6328741810b732410eec.png\";\n\n
 /******/ 	
 /******/ 	/* webpack/runtime/publicPath */
 /******/ 	(() => {
-/******/ 		__webpack_require__.p = "/javascript-movie-review/dist/";
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript)
+/******/ 				scriptUrl = document.currentScript.src;
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) {
+/******/ 					var i = scripts.length - 1;
+/******/ 					while (i > -1 && (!scriptUrl || !/^http(s?):/.test(scriptUrl))) scriptUrl = scripts[i--].src;
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl;
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */
