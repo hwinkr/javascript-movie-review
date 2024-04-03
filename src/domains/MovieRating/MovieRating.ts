@@ -1,12 +1,12 @@
 import BrowserStorage from "../Storage/Storage";
-import { BrowserStorageInterface } from "../Storage/Storage.type";
+import { DataStorage } from "../Storage/Storage.type";
 
-import { isValidElement } from "../../utils/type";
+import { isArrayElement } from "../../utils/type";
 
-import { MovieRatingManagerInterface, Rating, RatingItem } from "./MovieRatingManager.type";
+import { Rating, RatingItem } from "./MovieRating.type";
 
-export default class MovieRatingManager implements MovieRatingManagerInterface {
-  private storage: BrowserStorageInterface<RatingItem[]> | null = null;
+export default class MovieRating {
+  private storage: DataStorage<RatingItem[]> | null = null;
 
   private STORAGE_KEY: string = "movie-score";
 
@@ -59,7 +59,7 @@ export default class MovieRatingManager implements MovieRatingManagerInterface {
   }
 
   updateMovieRating(id: number, rating: number): void {
-    if (!isValidElement<number, Rating>([0, 2, 4, 6, 8, 10], rating)) return;
+    if (!isArrayElement<number, Rating>([0, 2, 4, 6, 8, 10], rating)) return;
 
     if (!this.getMovieById(id)) {
       this.add({ movieId: id, rating: rating });
